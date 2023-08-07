@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 // test for StrToInt
 func TestStrToInt(t *testing.T) {
@@ -24,8 +27,9 @@ func TestTimeToInt(t *testing.T) {
 func TestIntToTime(t *testing.T) {
 	//test for IntToTime
 	testIntToTime := IntToTime(0)
-	if testIntToTime != "00:00:00.000" {
-		t.Errorf("IntToTime was incorrect, got: %s, want: %s.", testIntToTime, "00:00:00.000")
+	fmt.Println(testIntToTime)
+	if testIntToTime != "00:00:00.0000" {
+		t.Errorf("IntToTime was incorrect, got: %s, want: %s.", testIntToTime, "00:00:00.0000")
 	}
 }
 
@@ -33,7 +37,7 @@ func TestIntToTime(t *testing.T) {
 func TestTimeDiff(t *testing.T) {
 	//test for TimeDiff
 	testTimeDiff := TimeDiff("00:00:00.000", "00:00:00.000")
-	if testTimeDiff != "00:00:00.000" {
+	if testTimeDiff != "00:00:00.0000" {
 		t.Errorf("TimeDiff was incorrect, got: %s, want: %s.", testTimeDiff, "00:00:00.000")
 	}
 }

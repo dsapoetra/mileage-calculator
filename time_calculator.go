@@ -69,6 +69,10 @@ func IntToTime(int int) string {
 		minutesStr = fmt.Sprintf("0%d", minutes)
 	}
 
+	if seconds < 10 {
+		secondsStr = fmt.Sprintf("0%d", seconds)
+	}
+
 	//concatenate the hours and minutes to get the time string
 	timeStr := hoursStr + ":" + minutesStr + ":" + secondsStr + "." + milisecondsStr + "000"
 
@@ -76,7 +80,7 @@ func IntToTime(int int) string {
 }
 
 // a function that get time difference between two strings
-func TimeDiff(time1 string, time2 string) string {
+func TimeDiff(time1 string, time2 string) (string, error) {
 	//convert the time strings to int
 	time1_int := TimeToInt(time1)
 	time2_int := TimeToInt(time2)
@@ -84,8 +88,13 @@ func TimeDiff(time1 string, time2 string) string {
 	//get the difference between the two times
 	diff := time2_int - time1_int
 
+	//check if diff is more than 5 minutes
+	if diff > 300000 {
+		return "", fmt.Errorf("The difference between the two times is more than 5 minutes")
+	}
+
 	//convert the difference to string
 	diff_str := IntToTime(diff)
 
-	return diff_str
+	return diff_str, nil
 }

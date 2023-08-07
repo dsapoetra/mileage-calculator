@@ -17,7 +17,15 @@ func main() {
 	//compare time in t[i] and t[i+1] for i = 0 to len(t)
 	var res []string
 	for i := 0; i < len(t)-1; i++ {
-		res = append(res, TimeDiff(t[i], t[i+1]))
+		timeDiff, err := TimeDiff(t[i], t[i+1])
+		if err != nil {
+			fmt.Println(err)
+			break
+		}
+
+		if err == nil {
+			res = append(res, timeDiff)
+		}
 	}
 
 	fmt.Println("output:")
