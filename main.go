@@ -14,7 +14,11 @@ func main() {
 		t = append(t, s[0])
 	}
 
-	res := TimeDiff(t[0], t[1])
+	//compare time in t[i] and t[i+1] for i = 0 to len(t)
+	var res []string
+	for i := 0; i < len(t)-1; i++ {
+		res = append(res, TimeDiff(t[i], t[i+1]))
+	}
 
 	fmt.Println("output:")
 	fmt.Println(lines)
