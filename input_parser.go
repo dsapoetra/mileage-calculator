@@ -43,30 +43,49 @@ func StrToInt(str string) int {
 // a function that convert time string to int
 func TimeToInt(time string) int {
 	//split the string to get the hours and minutes
-	time_split := strings.Split(time, ":")
+
+	time_and_ms := strings.Split(time, ".")
+
+	time_split := strings.Split(time_and_ms[0], ":")
 
 	//convert the hours and minutes to int
 	hours := StrToInt(time_split[0])
 	minutes := StrToInt(time_split[1])
+	seconds := StrToInt(time_split[2])
+	milisecond := StrToInt(time_and_ms[1])
 
-	//convert the hours to minutes
-	hours_to_minutes := hours * 60
+	//convert the hours to milliseconds
+	hours_to_milliseconds := hours * 3600000
 
-	//add the hours and minutes
-	total_minutes := hours_to_minutes + minutes
+	// convert the minutes to milliseconds
+	minutes_to_milliseconds := minutes * 60000
+
+	//convert the seconds to milliseconds
+	seconds_to_milliseconds := seconds * 1000
+
+	////add the hours and minutes
+	total_minutes := hours_to_milliseconds + minutes_to_milliseconds + seconds_to_milliseconds + milisecond
 
 	return total_minutes
 }
 
 // a function that convert int to time string
 func IntToTime(int int) string {
-	//convert the int to time string
-	hours := int / 60
-	minutes := int % 60
+	////convert the int to time string
+	//hours := int / 60
+	//minutes := int % 60
+
+	//convert the int to time string, from milliseconds to hours, minutes, seconds and miliseconds
+	hours := int / 3600000
+	minutes := (int % 3600000) / 60000
+	seconds := ((int % 3600000) % 60000) / 1000
+	miliseconds := ((int % 3600000) % 60000) % 1000
 
 	//convert the hours and minutes to string
 	hours_str := fmt.Sprintf("%d", hours)
 	minutes_str := fmt.Sprintf("%d", minutes)
+	seconds_str := fmt.Sprintf("%d", seconds)
+	miliseconds_str := fmt.Sprintf("%d", miliseconds)
 
 	//add a zero to the hours and minutes if they are less than 10
 	if hours < 10 {
@@ -77,7 +96,7 @@ func IntToTime(int int) string {
 	}
 
 	//concatenate the hours and minutes to get the time string
-	time_str := hours_str + ":" + minutes_str
+	time_str := hours_str + ":" + minutes_str + ":" + seconds_str + "." + miliseconds_str + "000"
 
 	return time_str
 }
