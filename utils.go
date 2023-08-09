@@ -17,3 +17,15 @@ func StrToFloat(str string) float64 {
 
 	return float
 }
+
+// float to string
+func FloatToStr(float float64) string {
+	return fmt.Sprintf("%f", float)
+}
+
+func PrintArrReversed(arr []Data) {
+	for i := len(arr) - 1; i >= 0; i-- {
+		price := FloatToStr(arr[i].price)
+		fmt.Println(arr[i].time + " " + arr[i].mileage + " " + price)
+	}
+}

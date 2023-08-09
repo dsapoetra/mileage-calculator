@@ -36,9 +36,6 @@ func TimeToInt(time string) int {
 
 // a function that convert int to time string
 func IntToTime(int int) string {
-	////convert the int to time string
-	//hours := int / 60
-	//minutes := int % 60
 
 	//convert the int to time string, from milliseconds to hours, minutes, seconds and miliseconds
 	hours := int / 3600000
@@ -65,7 +62,7 @@ func IntToTime(int int) string {
 	}
 
 	//concatenate the hours and minutes to get the time string
-	timeStr := hoursStr + ":" + minutesStr + ":" + secondsStr + "." + milisecondsStr + "000"
+	timeStr := hoursStr + ":" + minutesStr + ":" + secondsStr + "." + milisecondsStr
 
 	return timeStr
 }

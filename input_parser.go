@@ -9,12 +9,10 @@ import (
 	"strings"
 )
 
-func InputGetter() []string {
+func InputGetter(dataArr []Data) []Data {
 	fmt.Println("input text:")
 	reader := bufio.NewReader(os.Stdin)
-
-	var lines []string
-	//var timeSet  map[string]struct{}{}
+	i := int64(0)
 
 	for {
 		// read line from stdin using newline as separator
@@ -33,15 +31,21 @@ func InputGetter() []string {
 			break
 		}
 
-		if len(lines) > 0 && len(strings.TrimSpace(line)) > 0 {
-			td := strings.Split(lines[len(lines)-1], " ")
+		if len(dataArr) > 0 && len(strings.TrimSpace(line)) > 0 {
+			td := dataArr[len(dataArr)-1].time
 			ld := strings.Split(line, " ")
-			timeDif, _ := TimeDiff(td[0], ld[0])
+			timeDif, _ := TimeDiff(td, ld[0])
 			res := TimeToInt(timeDif)
 
-			//check if res is more than 5 minutes
+			//check if res is more than 5 minutes in milliseconds
 			if res > 300000 {
 				fmt.Println("error: more than 5 minutes")
+				break
+			}
+
+			//check if res is negative
+			if res < 0 {
+				fmt.Println("error: time should be in ascending order")
 				break
 			}
 
@@ -52,8 +56,35 @@ func InputGetter() []string {
 			break
 		}
 
-		//append the line to a slice
-		lines = append(lines, line)
+		// compare mileage with previous line
+		if len(dataArr) > 0 {
+			mileage := StrToFloat(dataArr[len(dataArr)-1].mileage)
+			lineSplit := strings.Split(line, " ")
+			mileage2 := StrToFloat(lineSplit[1])
+
+			//check if mileage is negative
+			if mileage2 < 0 {
+				fmt.Println("error: mileage should be positive")
+				break
+			}
+
+			//check if mileage is in ascending order
+			if mileage2 < mileage {
+				fmt.Println("error: mileage should be in ascending order")
+				break
+			}
+		}
+
+		lineSplit := strings.Split(line, " ")
+		data := Data{
+			time:    lineSplit[0],
+			mileage: lineSplit[1],
+		}
+
+		dataArr = append(dataArr, data)
+
+		i++
+
 	}
-	return lines
+	return dataArr
 }
