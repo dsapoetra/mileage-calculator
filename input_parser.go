@@ -12,8 +12,7 @@ import (
 func InputGetter(dataArr []Data) []Data {
 	fmt.Println("input text:")
 	reader := bufio.NewReader(os.Stdin)
-	i := int64(0)
-
+	timeUnique := make(map[string]bool)
 	for {
 		// read line from stdin using newline as separator
 
@@ -76,14 +75,20 @@ func InputGetter(dataArr []Data) []Data {
 		}
 
 		lineSplit := strings.Split(line, " ")
+
+		if ok := timeUnique[lineSplit[0]]; ok && len(dataArr) > 0 {
+			fmt.Println("error: duplicate time")
+			break
+		} else {
+			timeUnique[lineSplit[0]] = true
+		}
+
 		data := Data{
 			time:    lineSplit[0],
 			mileage: lineSplit[1],
 		}
 
 		dataArr = append(dataArr, data)
-
-		i++
 
 	}
 	return dataArr
