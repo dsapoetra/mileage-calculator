@@ -7,6 +7,12 @@ import (
 
 func main() {
 	lines := InputGetter()
+
+	if len(lines) < 2 {
+		fmt.Println("error: less than 2 lines")
+		return
+	}
+
 	var t []string
 
 	for i := 0; i < len(lines); i++ {
@@ -28,7 +34,13 @@ func main() {
 		}
 	}
 
-	fmt.Println("output:")
-	fmt.Println(lines)
+	l := len(lines)
+	lastMileage := strings.Split(lines[l-1], " ")
+	//cast lastMileage[1] from string to float64
+	lastMileageFloat := StrToFloat(lastMileage[1])
+
+	fare := Fare(lastMileageFloat)
+
+	fmt.Println(fare)
 	fmt.Println(res)
 }

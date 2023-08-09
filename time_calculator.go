@@ -5,15 +5,6 @@ import (
 	"strings"
 )
 
-// a function that convert string to int
-func StrToInt(str string) int {
-	//convert the string to int
-	var int int
-	fmt.Sscanf(str, "%d", &int)
-
-	return int
-}
-
 // a function that convert time string to int
 func TimeToInt(time string) int {
 	//split the string to get the hours and minutes
@@ -87,11 +78,6 @@ func TimeDiff(time1 string, time2 string) (string, error) {
 
 	//get the difference between the two times
 	diff := time2_int - time1_int
-
-	//check if diff is more than 5 minutes
-	if diff > 300000 {
-		return "", fmt.Errorf("The difference between the two times is more than 5 minutes")
-	}
 
 	//convert the difference to string
 	diff_str := IntToTime(diff)
