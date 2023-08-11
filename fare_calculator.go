@@ -13,7 +13,7 @@ func Fare(mileage float64) float64 {
 	} else if mileage <= 10000 {
 		fare = 400 + ((mileage-1000)/400)*40
 	} else {
-		fare = 400 + 9000/400*40 + ((mileage-10000)/350)*40
+		fare = 400 + (10000/400)*40 + ((mileage-10000)/350)*40
 	}
 
 	return fare

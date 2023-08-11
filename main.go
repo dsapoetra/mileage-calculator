@@ -1,13 +1,23 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 )
 
 func main() {
-	var dataArr []Data
-
-	dataArr = InputGetter(dataArr)
+	dataArr := make([]Data, 0)
+	reader := bufio.NewReader(os.Stdin)
+	var err error
+	fmt.Println("input text:")
+	for {
+		line, _ := reader.ReadString('\n')
+		dataArr, err = InputGetter(dataArr, line)
+		if err != nil {
+			break
+		}
+	}
 
 	if len(dataArr) < 2 {
 		fmt.Println("error: less than 2 lines")
