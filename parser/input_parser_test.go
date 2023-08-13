@@ -1,8 +1,9 @@
-package main
+package parser
 
 import (
 	"errors"
 	"io/ioutil"
+	"mileage-calculator/model"
 	"os"
 	"testing"
 )
@@ -11,7 +12,7 @@ func TestInputGetter(t *testing.T) {
 
 	line := "00:01:00.0 10.0"
 
-	var dataArr []Data
+	var dataArr []model.CabData
 	dataArr, _ = InputGetter(dataArr, line)
 
 	if len(dataArr) != 1 {
@@ -53,10 +54,10 @@ func mockStdin(t *testing.T, dummyInput string) (funcDefer func(), err error) {
 	}, nil
 }
 
-// test for checkTimeLatest(dataArr []Data, line string) error
+// test for checkTimeLatest(dataArr []CabData, line string) error
 func TestCheckTimeLatest(t *testing.T) {
-	var dataArr []Data
-	dataArr = append(dataArr, Data{"00:05:00.0", "0.0", 0.0})
+	var dataArr []model.CabData
+	dataArr = append(dataArr, model.CabData{"00:05:00.0", "0.0", 0.0})
 	//err := checkTimeLatest(dataArr, "00:07:00.0 0.0")
 	//if err != nil {
 	//	t.Errorf("checkTimeLatest was incorrect, got: %s, want: %v.", err, nil)
@@ -75,12 +76,19 @@ func TestCheckTimeLatest(t *testing.T) {
 
 // test for compareMileage(mileage1 string, mileage2 string) error
 func TestCompareMileage(t *testing.T) {
-	err := compareMileage("0.0", "0.0")
+	data := []model.CabData{
+		{"00:00:00.0", "0.0", 0.0},
+	}
+	err := compareMileage(data, "0.0")
 	if err != nil {
 		t.Errorf("compareMileage was incorrect, got: %s, want: %v.", err, nil)
 	}
 
-	err = compareMileage("0.1", "0.0")
+	data1 := []model.CabData{
+		{"00:00:00.0", "0.9", 0.0},
+	}
+
+	err = compareMileage(data1, "0.0")
 	if err == nil {
 		t.Errorf("compareMileage was incorrect, got: %s, want: %v.", err, errors.New("error: mileage is not in ascending order"))
 	}

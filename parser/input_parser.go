@@ -1,13 +1,16 @@
-package main
+package parser
 
 import (
 	"errors"
 	"fmt"
+	"mileage-calculator/model"
+	"mileage-calculator/time"
+	"mileage-calculator/utils"
 	"regexp"
 	"strings"
 )
 
-func InputGetter(dataArr []Data, line string) ([]Data, error) {
+func InputGetter(dataArr []model.CabData, line string) ([]model.CabData, error) {
 	timeUnique := make(map[string]bool)
 
 	// check if line is in correct format
@@ -27,9 +30,7 @@ func InputGetter(dataArr []Data, line string) ([]Data, error) {
 		return dataArr, errors.New("error: empty line")
 	}
 
-	if len(dataArr) > 1 {
-		err = compareMileage(dataArr[len(dataArr)-1].mileage, line)
-	}
+	err = compareMileage(dataArr, line)
 	lineSplit := strings.Split(line, " ")
 
 	if ok := timeUnique[lineSplit[0]]; ok && len(dataArr) > 0 {
@@ -39,9 +40,9 @@ func InputGetter(dataArr []Data, line string) ([]Data, error) {
 		timeUnique[lineSplit[0]] = true
 	}
 
-	data := Data{
-		time:    lineSplit[0],
-		mileage: lineSplit[1],
+	data := model.CabData{
+		Time:    lineSplit[0],
+		Mileage: lineSplit[1],
 	}
 
 	dataArr = append(dataArr, data)
@@ -49,16 +50,12 @@ func InputGetter(dataArr []Data, line string) ([]Data, error) {
 	return dataArr, nil
 }
 
-func checkTimeLatest(dataArr []Data, line string) error {
+func checkTimeLatest(dataArr []model.CabData, line string) error {
 	if len(dataArr) > 0 && len(strings.TrimSpace(line)) > 0 {
-		fmt.Println("HEREEE")
-		td := dataArr[len(dataArr)-1].time
-		fmt.Println("HEREEEE 2")
+		td := dataArr[len(dataArr)-1].Time
 		ld := strings.Split(line, " ")
-		timeDif, _ := TimeDiff(td, ld[0])
-		res := TimeToInt(timeDif)
-		fmt.Println(timeDif)
-		fmt.Println(res)
+		timeDif, _ := time.TimeDiff(td, ld[0])
+		res := time.TimeToInt(timeDif)
 
 		//check if res is more than 5 minutes in milliseconds
 		if res > 300000 {
@@ -85,9 +82,13 @@ func checkInputFormat(line string) error {
 	return nil
 }
 
-func compareMileage(mileage1 string, mileage2 string) error {
-	mileageFloat1 := StrToFloat(mileage1)
-	mileageFloat2 := StrToFloat(mileage2)
+func compareMileage(arr []model.CabData, mileage2 string) error {
+	if len(arr) == 0 {
+		return nil
+	}
+
+	mileageFloat1 := utils.StrToFloat(arr[len(arr)-1].Mileage)
+	mileageFloat2 := utils.StrToFloat(mileage2)
 
 	if mileageFloat2 < 0 {
 		return errors.New("error: mileage should be positive")

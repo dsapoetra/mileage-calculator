@@ -1,4 +1,4 @@
-package main
+package fare_calculator
 
 import (
 	"fmt"

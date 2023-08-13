@@ -1,7 +1,8 @@
-package main
+package time
 
 import (
 	"fmt"
+	"mileage-calculator/utils"
 	"strings"
 )
 
@@ -14,10 +15,10 @@ func TimeToInt(time string) int {
 	timeSplit := strings.Split(timeAndMs[0], ":")
 
 	//convert the hours and minutes to int
-	hours := StrToInt(timeSplit[0])
-	minutes := StrToInt(timeSplit[1])
-	seconds := StrToInt(timeSplit[2])
-	milisecond := StrToInt(timeAndMs[1])
+	hours := utils.StrToInt(timeSplit[0])
+	minutes := utils.StrToInt(timeSplit[1])
+	seconds := utils.StrToInt(timeSplit[2])
+	milisecond := utils.StrToInt(timeAndMs[1])
 
 	//convert the hours to milliseconds
 	hoursToMilliseconds := hours * 3600000

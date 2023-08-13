@@ -1,6 +1,9 @@
-package main
+package utils
 
-import "fmt"
+import (
+	"fmt"
+	"mileage-calculator/model"
+)
 
 // a function that convert string to int
 func StrToInt(str string) int {
@@ -23,9 +26,9 @@ func FloatToStr(float float64) string {
 	return fmt.Sprintf("%f", float)
 }
 
-func PrintArrReversed(arr []Data) {
+func PrintArrReversed(arr []model.CabData) {
 	for i := len(arr) - 1; i >= 0; i-- {
-		price := FloatToStr(arr[i].price)
-		fmt.Println(arr[i].time + " " + arr[i].mileage + " " + price)
+		price := FloatToStr(arr[i].Price)
+		fmt.Println(arr[i].Time + " " + arr[i].Mileage + " " + price)
 	}
 }

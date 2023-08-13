@@ -3,17 +3,21 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"mileage-calculator/fare_calculator"
+	"mileage-calculator/model"
+	"mileage-calculator/parser"
+	"mileage-calculator/utils"
 	"os"
 )
 
 func main() {
-	dataArr := make([]Data, 0)
+	dataArr := make([]model.CabData, 0)
 	reader := bufio.NewReader(os.Stdin)
 	var err error
 	fmt.Println("input text:")
 	for {
 		line, _ := reader.ReadString('\n')
-		dataArr, err = InputGetter(dataArr, line)
+		dataArr, err = parser.InputGetter(dataArr, line)
 		if err != nil {
 			break
 		}
@@ -25,8 +29,8 @@ func main() {
 	}
 
 	for i := 0; i < len(dataArr); i++ {
-		milageFloat := StrToFloat(dataArr[i].mileage)
-		dataArr[i].price = Fare(milageFloat)
+		milageFloat := utils.StrToFloat(dataArr[i].Mileage)
+		dataArr[i].Price = fare_calculator.Fare(milageFloat)
 	}
-	PrintArrReversed(dataArr)
+	utils.PrintArrReversed(dataArr)
 }

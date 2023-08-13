@@ -20,4 +20,8 @@
 # Go workspace file
 go.work
 
+# Intellij idea files
 .idea/
+
+# HTML coverage report
+*.html
