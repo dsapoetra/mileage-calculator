@@ -1,7 +1,9 @@
 package model
 
+import "github.com/shopspring/decimal"
+
 type CabData struct {
 	Time    string
 	Mileage string
-	Price   float64
+	Price   decimal.Decimal
 }

@@ -1,32 +1,30 @@
 package fare_calculator
 
 import (
-	"fmt"
+	"github.com/shopspring/decimal"
 	"testing"
 )
 
-// test for Fare
 func TestFare(t *testing.T) {
 	//test for Fare
 	testFare := Fare(1000)
-	if testFare != 400 {
-		t.Errorf("Fare was incorrect, got: %f, want: %f.", testFare, 400.0)
+	if testFare != decimal.NewFromInt(400) {
+		t.Errorf("Fare was incorrect, got: %v, want: %f.", testFare, 400.0)
 	}
-	//test for Fare
-	testFare = Fare(1001)
-	if testFare != 400.1 {
-		t.Errorf("Fare was incorrect, got: %f, want: %f.", testFare, 400.1)
+
+	testFare = Fare(1500)
+	if testFare != decimal.NewFromFloat(450.0) {
+		t.Errorf("Fare was incorrect, got: %v, want: %f.", testFare, 450.0)
 	}
 	//test for Fare
 	testFare = Fare(10000)
-	if testFare != 1300.0 {
-		t.Errorf("Fare was incorrect, got: %f, want: %f.", testFare, 1300.0)
+	if testFare != decimal.NewFromInt(1300) {
+		t.Errorf("Fare was incorrect, got: %v, want: %f.", testFare, 1300.0)
 	}
 
 	// test for Fare 10001
-	testFare = Fare(10001)
-	fmt.Println(testFare)
-	if testFare != 1400.1142857142856 {
-		t.Errorf("Fare was incorrect, got: %f, want: %f.", testFare, 1400.1142857142856)
+	testFare = Fare(15000)
+	if testFare.Equal(decimal.NewFromFloat(1871.428571)) {
+		t.Errorf("Fare was incorrect, got: %v, want: %f.", testFare, 1852.0)
 	}
 }

@@ -19,7 +19,7 @@ func FloatToStr(float float64) string {
 
 func PrintArrReversed(arr []model.CabData) {
 	for i := len(arr) - 1; i >= 0; i-- {
-		price := FloatToStr(arr[i].Price)
+		price := arr[i].Price.String()
 		fmt.Println(arr[i].Time + " " + arr[i].Mileage + " " + price)
 	}
 }
