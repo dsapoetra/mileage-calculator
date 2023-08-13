@@ -4,15 +4,6 @@ import (
 	"testing"
 )
 
-// test for StrToInt
-func TestStrToInt(t *testing.T) {
-	//test for StrToInt
-	testStrToInt := StrToInt("10")
-	if testStrToInt != 10 {
-		t.Errorf("StrToInt was incorrect, got: %d, want: %d.", testStrToInt, 10)
-	}
-}
-
 // test for StrToFloat
 func TestStrToFloat(t *testing.T) {
 	//test for StrToFloat
