@@ -9,11 +9,36 @@ package fare_calculator
 func Fare(mileage float64) float64 {
 	var fare float64
 	if mileage <= 1000 {
+<<<<<<< Updated upstream
 		fare = 400
 	} else if mileage <= 10000 {
 		fare = 400 + ((mileage-1000)/400)*40
 	} else {
 		fare = 400 + (10000/400)*40 + ((mileage-10000)/350)*40
+=======
+		return 400.0
+	} else if mileage > 1000 && mileage <= 10000 {
+		//fare = 400 + ((mileage-1000)/400)*40
+		base := 400.0
+		minusThousand := mileage - 1000
+		per400 := minusThousand / 400.0
+		t40 := per400 * 40
+		total := base + t40
+
+		return total
+
+	} else {
+		//mileage 15000
+		//fare := 400 + (9000/400)*40 + ((mileage-10000)/350)*40
+		b := 400.0
+		per400 := 9000.0 / 400.0
+		t40 := per400 * 40
+		min10000 := mileage - 10000
+		per350 := min10000 / 350
+		time40 := per350 * 40
+		total := b + t40 + time40
+		return total
+>>>>>>> Stashed changes
 	}
 
 	return fare

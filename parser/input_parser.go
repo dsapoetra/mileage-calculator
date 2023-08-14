@@ -54,8 +54,8 @@ func checkTimeLatest(dataArr []model.CabData, line string) error {
 	if len(dataArr) > 0 && len(strings.TrimSpace(line)) > 0 {
 		td := dataArr[len(dataArr)-1].Time
 		ld := strings.Split(line, " ")
-		timeDif, _ := time.TimeDiff(td, ld[0])
-		res := time.TimeToInt(timeDif)
+		timeDif, _ := time.Diff(td, ld[0])
+		res := time.ToInt(timeDif)
 
 		//check if res is more than 5 minutes in milliseconds
 		if res > 300000 {

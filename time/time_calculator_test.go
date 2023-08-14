@@ -5,12 +5,12 @@ import (
 	"testing"
 )
 
-// test for TimeToInt
+// test for ToInt
 func TestTimeToInt(t *testing.T) {
-	//test for TimeToInt
-	testTimeToInt := TimeToInt("00:00:00.000")
+	//test for ToInt
+	testTimeToInt := ToInt("00:00:00.000")
 	if testTimeToInt != 0 {
-		t.Errorf("TimeToInt was incorrect, got: %d, want: %d.", testTimeToInt, 0)
+		t.Errorf("ToInt was incorrect, got: %d, want: %d.", testTimeToInt, 0)
 	}
 }
 
@@ -24,11 +24,11 @@ func TestIntToTime(t *testing.T) {
 	}
 }
 
-// test for TimeDiff
+// test for Diff
 func TestTimeDiff(t *testing.T) {
-	//test for TimeDiff
-	testTimeDiff, _ := TimeDiff("00:00:00.0", "00:00:00.0")
+	//test for Diff
+	testTimeDiff, _ := Diff("00:00:00.0", "00:00:00.0")
 	if testTimeDiff != "00:00:00.0" {
-		t.Errorf("TimeDiff was incorrect, got: %s, want: %s.", testTimeDiff, "00:00:00.0")
+		t.Errorf("Diff was incorrect, got: %s, want: %s.", testTimeDiff, "00:00:00.0")
 	}
 }
