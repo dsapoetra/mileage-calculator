@@ -6,14 +6,8 @@ import (
 	"strings"
 )
 
-<<<<<<< Updated upstream
-// a function that convert time string to int
-func TimeToInt(time string) int {
-	//split the string to get the hours and minutes
-=======
 // ToInt converts time string to int as milliseconds
 func ToInt(time string) int {
->>>>>>> Stashed changes
 
 	timeAndMs := strings.Split(time, ".")
 
@@ -74,22 +68,14 @@ func IntToTime(int int) string {
 	return timeStr
 }
 
-<<<<<<< Updated upstream
-// a function that get time difference between two strings
-func TimeDiff(time1 string, time2 string) (string, error) {
-	//convert the time strings to int
-	time1_int := TimeToInt(time1)
-	time2_int := TimeToInt(time2)
-=======
 // Diff gets the difference between two time strings
 func Diff(time1 string, time2 string) (string, error) {
 	//convert the time strings to int
 	time1Int := ToInt(time1)
 	time2Int := ToInt(time2)
->>>>>>> Stashed changes
 
 	//get the difference between the two times
-	diff := time2_int - time1_int
+	diff := time2Int - time1Int
 
 	//convert the difference to string
 	diff_str := IntToTime(diff)
